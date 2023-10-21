@@ -28,16 +28,15 @@ body {
 .main-container {
     max-width: 100vw;
     max-height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .main-heading {
     color: red;
     font-size: 50px;
     letter-spacing: 2rem;
-    position: absolute;
-    top: 50%;
-    right: 50%;
-    transform: translate(50%, -50%);
     text-shadow:
         0 -1px 0 #fff,
         0 1px 0 #2e2e2e,
@@ -62,4 +61,5 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }

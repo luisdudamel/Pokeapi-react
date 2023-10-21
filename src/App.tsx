@@ -7,11 +7,12 @@ const App = (): JSX.Element => {
     const apiUrl = "https://pokeapi.co/api/v2/pokemon";
     const { getPokemons } = usePokemon(apiUrl);
     const [totalPokemons, setTotalPokemons] = useState<Pokemon[]>();
+    const [currentPage, setCurrentPage] = useState<number>(0);
     useEffect(() => {
         (async () => {
-            setTotalPokemons(await getPokemons());
+            setTotalPokemons(await getPokemons(currentPage.toString()));
         })();
-    }, [getPokemons]);
+    }, [getPokemons, currentPage]);
 
     return (
         <>
@@ -19,9 +20,15 @@ const App = (): JSX.Element => {
                 <h1 className="main-heading">POKE-REACT</h1>
                 <Button
                     buttonAction={() => {
-                        console.log("holis");
+                        setCurrentPage(currentPage - 20);
                     }}
-                    buttonText="Get all pokemons"
+                    buttonText="Previous"
+                />
+                <Button
+                    buttonAction={() => {
+                        setCurrentPage(currentPage + 20);
+                    }}
+                    buttonText="Next"
                 />
                 <div className="pokemon-list">
                     {totalPokemons?.map((pokemon) => (
