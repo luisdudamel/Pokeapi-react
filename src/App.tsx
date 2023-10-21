@@ -1,8 +1,18 @@
+import { useEffect, useState } from "react";
 import Button from "./components/Button/Button";
 import Pokemon from "./components/Pokemon/Pokemon";
-import { mockPokemon } from "./mocks/pokemon";
+import usePokemon from "./hooks/usePokemon";
 
 const App = (): JSX.Element => {
+    const apiUrl = "https://pokeapi.co/api/v2/pokemon";
+    const { getPokemons } = usePokemon(apiUrl);
+    const [totalPokemons, setTotalPokemons] = useState<Pokemon[]>();
+    useEffect(() => {
+        (async () => {
+            setTotalPokemons(await getPokemons());
+        })();
+    }, [getPokemons]);
+
     return (
         <>
             <div className="main-container">
@@ -13,7 +23,11 @@ const App = (): JSX.Element => {
                     }}
                     buttonText="Get all pokemons"
                 />
-                <Pokemon pokemon={mockPokemon} />
+                <div className="pokemon-list">
+                    {totalPokemons?.map((pokemon) => (
+                        <Pokemon pokemon={pokemon} key={pokemon.index} />
+                    ))}
+                </div>
             </div>
         </>
     );

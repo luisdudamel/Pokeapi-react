@@ -5,3 +5,15 @@ export type Pokemon = {
     index: number;
     image: string;
 };
+
+export type ApiPokemon = {
+    name: string;
+    url: string;
+};
+
+export type ApiPokemonResponse = {
+    count: number;
+    next: string;
+    previous: null | string;
+    results: ApiPokemon[];
+};
