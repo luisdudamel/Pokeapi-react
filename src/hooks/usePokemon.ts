@@ -1,18 +1,26 @@
 import { useCallback } from "react";
-import { ApiPokemonResponse, Pokemon } from "../types/pokemon";
+import { ApiPokemonData, ApiPokemonResponse, Pokemon } from "../types/pokemon";
 
 const usePokemon = (pokemonUrl: string) => {
     const getPokemons = useCallback(
-        async (currentOffset: string): Promise<Pokemon[]> => {
+        async (
+            currentOffset: string
+        ): Promise<{
+            pokemons: Pokemon[];
+            totalPokemon: ApiPokemonResponse;
+        }> => {
             const totalPokemonsResponse = await fetch(
                 `${pokemonUrl}?offset=${currentOffset}&limit=20/`
             );
 
+            const totalPokemonCount =
+                (await totalPokemonsResponse.json()) as ApiPokemonResponse;
+
             const currentPokemonsData = await Promise.all(
-                (
-                    (await totalPokemonsResponse.json()) as ApiPokemonResponse
-                ).results.map(async (pokemonResponse) => {
-                    return (await fetch(pokemonResponse.url)).json();
+                totalPokemonCount.results.map(async (pokemonResponse) => {
+                    return (
+                        await fetch(pokemonResponse.url)
+                    ).json() as Promise<ApiPokemonData>;
                 })
             );
             const pokemons = currentPokemonsData.map((pokemon): Pokemon => {
@@ -25,7 +33,7 @@ const usePokemon = (pokemonUrl: string) => {
                 };
             });
 
-            return pokemons;
+            return { pokemons, totalPokemon: totalPokemonCount };
         },
         [pokemonUrl]
     );

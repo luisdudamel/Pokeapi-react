@@ -11,6 +11,21 @@ export type ApiPokemon = {
     url: string;
 };
 
+export type ApiPokemonData = {
+    name: string;
+    type: string;
+    weight: number;
+    id: number;
+    types: [
+        {
+            type: {
+                name: string;
+            };
+        },
+    ];
+    sprites: { front_default: string };
+};
+
 export type ApiPokemonResponse = {
     count: number;
     next: string;

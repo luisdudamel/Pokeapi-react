@@ -10,7 +10,8 @@ const App = (): JSX.Element => {
     const [currentPage, setCurrentPage] = useState<number>(0);
     useEffect(() => {
         (async () => {
-            setTotalPokemons(await getPokemons(currentPage.toString()));
+            const pokeData = await getPokemons(currentPage.toString());
+            setTotalPokemons(pokeData.pokemons);
         })();
     }, [getPokemons, currentPage]);
 
@@ -20,7 +21,9 @@ const App = (): JSX.Element => {
                 <h1 className="main-heading">POKE-REACT</h1>
                 <Button
                     buttonAction={() => {
-                        setCurrentPage(currentPage - 20);
+                        if (currentPage !== 0) {
+                            setCurrentPage(currentPage - 20);
+                        }
                     }}
                     buttonText="Previous"
                 />
@@ -31,9 +34,11 @@ const App = (): JSX.Element => {
                     buttonText="Next"
                 />
                 <div className="pokemon-list">
-                    {totalPokemons?.map((pokemon) => (
-                        <Pokemon pokemon={pokemon} key={pokemon.index} />
-                    ))}
+                    {totalPokemons?.length
+                        ? totalPokemons?.map((pokemon) => (
+                              <Pokemon pokemon={pokemon} key={pokemon.index} />
+                          ))
+                        : "No more pokemons"}
                 </div>
             </div>
         </>
