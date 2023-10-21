@@ -10,7 +10,7 @@ const usePokemon = (pokemonUrl: string) => {
             totalPokemon: ApiPokemonResponse;
         }> => {
             const totalPokemonsResponse = await fetch(
-                `${pokemonUrl}?offset=${currentOffset}&limit=20/`
+                `${pokemonUrl}?offset=${currentOffset}&limit=10/`
             );
 
             const totalPokemonCount =

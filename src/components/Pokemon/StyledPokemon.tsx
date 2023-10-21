@@ -8,6 +8,7 @@ export const StyledPokemon = styled.li`
     flex-direction: column;
     align-items: center;
     font-family: "Roboto";
+    cursor: pointer;
 `;
 
 export const StyledPokemonName = styled.h3`
@@ -22,4 +23,8 @@ export const StyledPokemonImage = styled.img`
 export const StyledPokemonStats = styled.ul`
     list-style: none;
     padding-left: 0px;
+`;
+
+export const StyledPokemonListItem = styled.span`
+    font-weight: 600;
 `;
