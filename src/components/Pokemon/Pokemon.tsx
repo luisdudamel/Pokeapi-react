@@ -20,7 +20,12 @@ const Pokemon = ({ pokemon }: PokemonProps): JSX.Element => {
             <StyledPokemonName>
                 {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
             </StyledPokemonName>
-            <StyledPokemonImage src={pokemon.image} />
+            <StyledPokemonImage
+                src={pokemon.image}
+                alt={`${
+                    pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
+                } in 8bits`}
+            />
             <StyledPokemonStats>
                 <li>
                     <StyledPokemonListItem>Type: </StyledPokemonListItem>
