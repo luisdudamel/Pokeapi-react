@@ -4,6 +4,7 @@ import Pokemon from "./components/Pokemon/Pokemon";
 import usePokemon from "./hooks/usePokemon";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ListPage from "./pages/ListPage/ListPage";
+import PokemonPage from "./pages/PokemonPage/PokemonPage";
 
 const App = (): JSX.Element => {
     const apiUrl = "https://pokeapi.co/api/v2/pokemon";
@@ -21,6 +22,10 @@ const App = (): JSX.Element => {
         {
             path: "/",
             element: <ListPage totalPokemons={totalPokemons!} />,
+        },
+        {
+            path: "pokemon/:pokemonId",
+            element: <PokemonPage />,
         },
     ]);
 
