@@ -1,4 +1,6 @@
 import Button from "./components/Button/Button";
+import Pokemon from "./components/Pokemon/Pokemon";
+import { mockPokemon } from "./mocks/pokemon";
 
 const App = (): JSX.Element => {
     return (
@@ -11,6 +13,7 @@ const App = (): JSX.Element => {
                     }}
                     buttonText="Get all pokemons"
                 />
+                <Pokemon pokemon={mockPokemon} />
             </div>
         </>
     );
