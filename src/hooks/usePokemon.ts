@@ -38,7 +38,24 @@ const usePokemon = (pokemonUrl: string) => {
         [pokemonUrl]
     );
 
-    return { getPokemons };
+    const getPokemonById = useCallback(
+        async (id: string): Promise<Pokemon> => {
+            const pokemonResponse = await fetch(`${pokemonUrl}/${id}`);
+            const pokemonData =
+                (await pokemonResponse.json()) as ApiPokemonData;
+
+            return {
+                name: pokemonData.name,
+                image: pokemonData.sprites.front_default,
+                index: pokemonData.id,
+                type: pokemonData.types[0].type.name,
+                weight: pokemonData.weight,
+            };
+        },
+
+        [pokemonUrl]
+    );
+    return { getPokemons, getPokemonById };
 };
 
 export default usePokemon;

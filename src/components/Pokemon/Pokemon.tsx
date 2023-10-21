@@ -13,12 +13,14 @@ interface PokemonProps {
 const Pokemon = ({ pokemon }: PokemonProps): JSX.Element => {
     return (
         <StyledPokemon>
-            <StyledPokemonName>{pokemon.name}</StyledPokemonName>
+            <StyledPokemonName>
+                {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+            </StyledPokemonName>
             <StyledPokemonImage src={pokemon.image} />
             <StyledPokemonStats>
                 <li>Type: {pokemon.type}</li>
-                <li>Weight: {pokemon.weight}</li>
-                <li>Index: {pokemon.index}</li>
+                <li>Weight: {pokemon.weight}kg</li>
+                <li>Index: #{pokemon.index}</li>
             </StyledPokemonStats>
         </StyledPokemon>
     );

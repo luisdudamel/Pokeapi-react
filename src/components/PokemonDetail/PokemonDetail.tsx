@@ -1,12 +1,17 @@
+import { Pokemon } from "../../types/pokemon";
 import { PokemonDetailStyled } from "./PokemonDetailStyled";
 
-const PokemonDetail = (): JSX.Element => {
+interface PokemonDetailProps {
+    pokemon: Pokemon;
+}
+
+const PokemonDetail = ({ pokemon }: PokemonDetailProps): JSX.Element => {
     return (
         <PokemonDetailStyled>
-            <h2>Pikachu</h2>
-            <img src="../../pikachu.jpg" alt="Pikachu un 8bits" />
-            <p>Pokemon Type: Electric</p>
-            <p>Weight: 14kg</p>
+            <h2>{pokemon.name}</h2>
+            <img src={pokemon.image} alt={`${pokemon.name} en 8bits`} />
+            <p>Pokemon Type: {pokemon.type}</p>
+            <p>Weight: {pokemon.weight}kg</p>
         </PokemonDetailStyled>
     );
 };
