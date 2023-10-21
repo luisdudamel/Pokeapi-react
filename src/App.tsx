@@ -7,10 +7,11 @@ import ListPage from "./pages/ListPage/ListPage";
 import PokemonPage from "./pages/PokemonPage/PokemonPage";
 
 const App = (): JSX.Element => {
-    const apiUrl = "https://pokeapi.co/api/v2/pokemon";
+    const apiUrl = import.meta.env.VITE_API_URL;
     const { getPokemons } = usePokemon(apiUrl);
     const [totalPokemons, setTotalPokemons] = useState<Pokemon[]>();
     const [currentPage, setCurrentPage] = useState<number>(0);
+
     useEffect(() => {
         (async () => {
             const pokeData = await getPokemons(currentPage.toString());

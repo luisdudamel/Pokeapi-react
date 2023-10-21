@@ -1,7 +1,7 @@
 import { Pokemon } from "../types/pokemon";
 
 export const mockPikachu: Pokemon = {
-    name: "Pikachu",
+    name: "pikachu",
     type: "Electric",
     weight: 23,
     index: 2,
@@ -9,7 +9,7 @@ export const mockPikachu: Pokemon = {
 };
 
 export const mockCharizard: Pokemon = {
-    name: "Charizard",
+    name: "charizard",
     type: "Fire",
     weight: 23,
     index: 2,
