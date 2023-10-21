@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const StyledPokemon = styled.div`
+export const StyledPokemon = styled.li`
     border: solid 2px red;
     height: 300px;
     width: 200px;
