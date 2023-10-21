@@ -1,19 +1,45 @@
+import { useEffect, useState } from "react";
 import Button from "./components/Button/Button";
 import Pokemon from "./components/Pokemon/Pokemon";
-import { mockPokemon } from "./mocks/pokemon";
+import usePokemon from "./hooks/usePokemon";
 
 const App = (): JSX.Element => {
+    const apiUrl = "https://pokeapi.co/api/v2/pokemon";
+    const { getPokemons } = usePokemon(apiUrl);
+    const [totalPokemons, setTotalPokemons] = useState<Pokemon[]>();
+    const [currentPage, setCurrentPage] = useState<number>(0);
+    useEffect(() => {
+        (async () => {
+            const pokeData = await getPokemons(currentPage.toString());
+            setTotalPokemons(pokeData.pokemons);
+        })();
+    }, [getPokemons, currentPage]);
+
     return (
         <>
             <div className="main-container">
                 <h1 className="main-heading">POKE-REACT</h1>
                 <Button
                     buttonAction={() => {
-                        console.log("holis");
+                        if (currentPage !== 0) {
+                            setCurrentPage(currentPage - 20);
+                        }
                     }}
-                    buttonText="Get all pokemons"
+                    buttonText="Previous"
                 />
-                <Pokemon pokemon={mockPokemon} />
+                <Button
+                    buttonAction={() => {
+                        setCurrentPage(currentPage + 20);
+                    }}
+                    buttonText="Next"
+                />
+                <div className="pokemon-list">
+                    {totalPokemons?.length
+                        ? totalPokemons?.map((pokemon) => (
+                              <Pokemon pokemon={pokemon} key={pokemon.index} />
+                          ))
+                        : "No more pokemons"}
+                </div>
             </div>
         </>
     );
