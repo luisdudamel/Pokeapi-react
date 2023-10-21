@@ -5,6 +5,8 @@ export const StyledPokemonList = styled.ul`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
 `;
 
 export const StyledPokemonListContainer = styled.div`

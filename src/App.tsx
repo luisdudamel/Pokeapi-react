@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import Button from "./components/Button/Button";
 import Pokemon from "./components/Pokemon/Pokemon";
 import usePokemon from "./hooks/usePokemon";
-import PokemonList from "./components/PokemonList/PokemonList";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ListPage from "./pages/ListPage/ListPage";
+import PokemonPage from "./pages/PokemonPage/PokemonPage";
 
 const App = (): JSX.Element => {
     const apiUrl = "https://pokeapi.co/api/v2/pokemon";
@@ -16,8 +18,20 @@ const App = (): JSX.Element => {
         })();
     }, [getPokemons, currentPage]);
 
+    const router = createBrowserRouter([
+        {
+            path: "/",
+            element: <ListPage totalPokemons={totalPokemons!} />,
+        },
+        {
+            path: "pokemon/:pokemonId",
+            element: <PokemonPage />,
+        },
+    ]);
+
     return (
         <>
+            {" "}
             <div className="main-container">
                 <h1 className="main-heading">POKE-REACT</h1>
                 <Button
@@ -34,8 +48,8 @@ const App = (): JSX.Element => {
                     }}
                     buttonText="Next"
                 />
-                <PokemonList pokemons={totalPokemons!} />
             </div>
+            <RouterProvider router={router} />
         </>
     );
 };
