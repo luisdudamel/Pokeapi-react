@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { mockPokemon } from "../../mocks/pokemon";
+import { mockPikachu } from "../../mocks/pokemon";
 import Pokemon from "./Pokemon";
 
 describe("Given a Pokemon component", () => {
     describe("When it receives a pokemon with the name `Pikachu`", () => {
         test("Then it should show a heading with the name `Pikachu`", () => {
-            const pokemonToShow = mockPokemon;
+            const pokemonToShow = mockPikachu;
             const expectedPokemonName = "Pikachu";
 
             render(<Pokemon pokemon={pokemonToShow} />);

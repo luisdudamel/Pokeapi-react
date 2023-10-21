@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "./components/Button/Button";
 import Pokemon from "./components/Pokemon/Pokemon";
 import usePokemon from "./hooks/usePokemon";
+import PokemonList from "./components/PokemonList/PokemonList";
 
 const App = (): JSX.Element => {
     const apiUrl = "https://pokeapi.co/api/v2/pokemon";
@@ -33,13 +34,7 @@ const App = (): JSX.Element => {
                     }}
                     buttonText="Next"
                 />
-                <div className="pokemon-list">
-                    {totalPokemons?.length
-                        ? totalPokemons?.map((pokemon) => (
-                              <Pokemon pokemon={pokemon} key={pokemon.index} />
-                          ))
-                        : "No more pokemons"}
-                </div>
+                <PokemonList pokemons={totalPokemons!} />
             </div>
         </>
     );
