@@ -56,7 +56,7 @@ const SearchBar = ({ pokemons }: SearchBarProps): JSX.Element => {
         <>
             {!unexistentPokemon && <p>Pokemon doesn't exist!</p>}
             <SearchBarStyled onSubmit={(event) => handleSubmit(event)}>
-                <label htmlFor="search-input" />
+                <label htmlFor="search-input" aria-label="search-input" />
                 <SearchInputStyled
                     type="text"
                     id="search-input"
@@ -72,7 +72,7 @@ const SearchBar = ({ pokemons }: SearchBarProps): JSX.Element => {
                 />
                 {searchFormData.searchText && (
                     <div>
-                        <SearchResultsOverlay>
+                        <SearchResultsOverlay aria-label="pokemon-list">
                             {pokemonFiltered.map((pokemon) => (
                                 <SearchResult
                                     onClick={() =>
