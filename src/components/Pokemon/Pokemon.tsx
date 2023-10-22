@@ -17,30 +17,50 @@ const Pokemon = ({ pokemon }: PokemonProps): JSX.Element => {
 
     return (
         <StyledPokemon onClick={() => navigate(`pokemon/${pokemon.index}`)}>
-            <StyledPokemonName>
-                {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-            </StyledPokemonName>
-            <StyledPokemonImage
-                src={pokemon.image}
-                alt={`${
-                    pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
-                } in 8bits`}
-            />
-            <StyledPokemonStats>
-                <li>
-                    <StyledPokemonListItem>Type: </StyledPokemonListItem>
-                    {pokemon.type.charAt(0).toUpperCase() +
-                        pokemon.type.slice(1)}
-                </li>
-                <li>
-                    <StyledPokemonListItem>Weight: </StyledPokemonListItem>
-                    {pokemon.weight}kg
-                </li>
-                <li>
-                    <StyledPokemonListItem>Index: </StyledPokemonListItem> #
-                    {pokemon.index}
-                </li>
-            </StyledPokemonStats>
+            <div className="game-boy-wrapper">
+                <div className="game-boy">
+                    <div className="game-boy-screen">
+                        <div className="screen-info-wrapper--top">
+                            <StyledPokemonName>
+                                {pokemon.name.charAt(0).toUpperCase() +
+                                    pokemon.name.slice(1)}
+                            </StyledPokemonName>
+                            # {pokemon.index}
+                        </div>
+                        <div className="screen-info-wrapper--bottom">
+                            <StyledPokemonImage
+                                src={pokemon.image}
+                                alt={`${
+                                    pokemon.name.charAt(0).toUpperCase() +
+                                    pokemon.name.slice(1)
+                                } in 8bits`}
+                            />
+                            <StyledPokemonStats>
+                                <li>
+                                    <StyledPokemonListItem>
+                                        Type:
+                                        <br />
+                                    </StyledPokemonListItem>
+                                    {pokemon.type.charAt(0).toUpperCase() +
+                                        pokemon.type.slice(1)}
+                                </li>
+                                <li>
+                                    <StyledPokemonListItem>
+                                        Weight:
+                                        <br />
+                                    </StyledPokemonListItem>
+                                    {pokemon.weight}kg
+                                </li>
+                            </StyledPokemonStats>
+                            <br />
+                        </div>
+                    </div>
+                    <div className="controls-wrapper">
+                        <div className="cross"></div>
+                        <div className="circle-buttons"></div>
+                    </div>
+                </div>
+            </div>
         </StyledPokemon>
     );
 };
