@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 export const FooterStyled = styled.footer`
     background-color: red;
     width: 100%;
-    height: 60px;
+    height: 70px;
     position: fixed;
     bottom: 0px;
     display: flex;
@@ -18,7 +18,7 @@ export const StyledPaginationButton = styled.button`
     height: 40px;
     font-size: 20px;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 20px;
     font-family: "Roboto";
     font-weight: 600;
 `;
