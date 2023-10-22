@@ -8,14 +8,13 @@ const ListPage = (): JSX.Element => {
     const apiUrl = import.meta.env.VITE_API_URL;
     const { getPokemons, pokemonNames } = usePokemon(apiUrl as string);
     const [totalPokemons, setTotalPokemons] = useState<Pokemon[]>();
-    const [currentPage, setCurrentPage] = useState<number>(0);
 
     useEffect(() => {
         (async () => {
-            const pokeData = await getPokemons(currentPage.toString());
+            const pokeData = await getPokemons("0");
             setTotalPokemons(pokeData.pokemons);
         })();
-    }, [getPokemons, currentPage]);
+    }, [getPokemons]);
 
     return (
         <>
