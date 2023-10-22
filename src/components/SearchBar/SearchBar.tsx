@@ -25,6 +25,7 @@ const SearchBar = ({ pokemons }: SearchBarProps): JSX.Element => {
     const [searchFormData, setSearchFormData] = useState<FormData>({
         searchText: "",
     });
+    const [unexistentPokemon, setUnexistentPokemon] = useState<boolean>(true);
 
     const pokemonFiltered = filterSearch(pokemons, searchFormData.searchText);
 
@@ -34,6 +35,7 @@ const SearchBar = ({ pokemons }: SearchBarProps): JSX.Element => {
     };
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setUnexistentPokemon(true);
         setSearchFormData({
             ...searchFormData,
             searchText: event.target.value,
@@ -41,37 +43,51 @@ const SearchBar = ({ pokemons }: SearchBarProps): JSX.Element => {
     };
 
     const navigateToSearchedPokemon = async (pokemonName: string) => {
-        const { index } = await getPokemonById(pokemonName);
-        navigate(`/pokemon/${index}`);
+        if (!pokemonFiltered.includes(pokemonName)) {
+            setUnexistentPokemon(false);
+            return;
+        }
+        const getPokemonResponse = await getPokemonById(pokemonName);
+
+        navigate(`/pokemon/${getPokemonResponse.index.toString()}`);
     };
 
     return (
-        <SearchBarStyled onSubmit={(event) => handleSubmit(event)}>
-            <label htmlFor="search-input" />
-            <SearchInputStyled
-                type="text"
-                id="search-input"
-                placeholder="Search a pokemon!"
-                value={searchFormData.searchText}
-                onChange={(event) => handleFormChange(event)}
-            ></SearchInputStyled>
-            <Button buttonText="Search" buttonAction={() => {}} />
-            {searchFormData.searchText && (
-                <div>
-                    <SearchResultsOverlay>
-                        {pokemonFiltered.map((pokemon) => (
-                            <SearchResult
-                                onClick={() =>
-                                    navigateToSearchedPokemon(pokemon)
-                                }
-                            >
-                                {pokemon}
-                            </SearchResult>
-                        ))}
-                    </SearchResultsOverlay>
-                </div>
-            )}
-        </SearchBarStyled>
+        <>
+            {!unexistentPokemon && <p>Pokemon doesn't exist!</p>}
+            <SearchBarStyled onSubmit={(event) => handleSubmit(event)}>
+                <label htmlFor="search-input" />
+                <SearchInputStyled
+                    type="text"
+                    id="search-input"
+                    placeholder="Search a pokemon!"
+                    value={searchFormData.searchText}
+                    onChange={(event) => handleFormChange(event)}
+                ></SearchInputStyled>
+                <Button
+                    buttonText="Search"
+                    buttonAction={() =>
+                        navigateToSearchedPokemon(searchFormData.searchText)
+                    }
+                />
+                {searchFormData.searchText && (
+                    <div>
+                        <SearchResultsOverlay>
+                            {pokemonFiltered.map((pokemon) => (
+                                <SearchResult
+                                    onClick={() =>
+                                        navigateToSearchedPokemon(pokemon)
+                                    }
+                                >
+                                    {pokemon.charAt(0).toUpperCase() +
+                                        pokemon.slice(1)}
+                                </SearchResult>
+                            ))}
+                        </SearchResultsOverlay>
+                    </div>
+                )}
+            </SearchBarStyled>
+        </>
     );
 };
 

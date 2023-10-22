@@ -60,6 +60,7 @@ const usePokemon = (pokemonUrl: string) => {
     const getPokemonById = useCallback(
         async (id: string): Promise<Pokemon> => {
             const pokemonResponse = await fetch(`${pokemonUrl}/${id}`);
+
             const pokemonData =
                 (await pokemonResponse.json()) as ApiPokemonData;
 
