@@ -4,6 +4,8 @@ export type Pokemon = {
     weight: number;
     index: number;
     image: string;
+    imageHD: string;
+    abilites: string[];
 };
 
 export type ApiPokemon = {
@@ -23,7 +25,18 @@ export type ApiPokemonData = {
             };
         },
     ];
-    sprites: { front_default: string };
+    sprites: {
+        front_default: string;
+        other: { dream_world: { front_default: string } };
+    };
+    abilities: [
+        {
+            ability: {
+                name: string;
+                url: string;
+            };
+        },
+    ];
 };
 
 export type ApiPokemonResponse = {

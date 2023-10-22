@@ -26,26 +26,23 @@ const Footer = ({
     return (
         <FooterStyled>
             <StyledPaginationContainer>
-                <StyledPaginationButton>
-                    <FontAwesomeIcon
-                        icon={faChevronCircleLeft}
-                        onClick={() => {
-                            if (currentPage > 0)
-                                setCurrentPage(currentPage - 10);
-                        }}
-                    />
+                <StyledPaginationButton
+                    onClick={() => {
+                        if (currentPage > 0) setCurrentPage(currentPage - 10);
+                    }}
+                >
+                    <FontAwesomeIcon icon={faChevronCircleLeft} />
                 </StyledPaginationButton>
                 <StyledPaginationCounter>
                     {pokemonsShown}/{totalPokemons}
                 </StyledPaginationCounter>
-                <StyledPaginationButton>
-                    <FontAwesomeIcon
-                        icon={faChevronCircleRight}
-                        onClick={() => {
-                            if (currentPage < totalPokemons)
-                                setCurrentPage(currentPage + 10);
-                        }}
-                    />
+                <StyledPaginationButton
+                    onClick={() => {
+                        if (currentPage < totalPokemons)
+                            setCurrentPage(currentPage + 10);
+                    }}
+                >
+                    <FontAwesomeIcon icon={faChevronCircleRight} />
                 </StyledPaginationButton>
             </StyledPaginationContainer>
         </FooterStyled>
