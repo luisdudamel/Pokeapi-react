@@ -31,7 +31,6 @@ const SearchBar = ({ pokemons }: SearchBarProps): JSX.Element => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(event.target);
     };
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +69,7 @@ const SearchBar = ({ pokemons }: SearchBarProps): JSX.Element => {
                         navigateToSearchedPokemon(searchFormData.searchText)
                     }
                 />
-                {searchFormData.searchText && (
+                {unexistentPokemon && searchFormData.searchText && (
                     <div>
                         <SearchResultsOverlay aria-label="pokemon-list">
                             {pokemonFiltered.map((pokemon) => (
