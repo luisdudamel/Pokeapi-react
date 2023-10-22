@@ -1,14 +1,17 @@
-import Button from "../Button/Button";
 import {
     SearchBarStyled,
+    SearchClearButtonStyled,
     SearchInputStyled,
     SearchResult,
     SearchResultsOverlay,
+    UnexistentFeedbackStyled,
 } from "./SearchBarStyled";
 import { useState } from "react";
 import { filterSearch } from "./filterSearch";
 import usePokemon from "../../hooks/usePokemon";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
 interface FormData {
     searchText: string;
@@ -25,68 +28,78 @@ const SearchBar = ({ pokemons }: SearchBarProps): JSX.Element => {
     const [searchFormData, setSearchFormData] = useState<FormData>({
         searchText: "",
     });
-    const [unexistentPokemon, setUnexistentPokemon] = useState<boolean>(true);
 
-    const pokemonFiltered = filterSearch(pokemons, searchFormData.searchText);
+    const pokemonFiltered = filterSearch(
+        pokemons,
+        searchFormData.searchText.toLowerCase()
+    );
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
     };
 
     const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUnexistentPokemon(true);
         setSearchFormData({
             ...searchFormData,
             searchText: event.target.value,
         });
     };
 
+    const clearSearch = () => {
+        setSearchFormData({ searchText: "" });
+    };
+
     const navigateToSearchedPokemon = async (pokemonName: string) => {
-        if (!pokemonFiltered.includes(pokemonName)) {
-            setUnexistentPokemon(false);
-            return;
-        }
         const getPokemonResponse = await getPokemonById(pokemonName);
 
         navigate(`/pokemon/${getPokemonResponse.index.toString()}`);
     };
 
     return (
-        <>
-            {!unexistentPokemon && <p>Pokemon doesn't exist!</p>}
-            <SearchBarStyled onSubmit={(event) => handleSubmit(event)}>
+        <SearchBarStyled onSubmit={(event) => handleSubmit(event)}>
+            <div className="search-bar-container">
                 <label htmlFor="search-input" aria-label="search-input" />
                 <SearchInputStyled
                     type="text"
+                    autoComplete="off"
                     id="search-input"
                     placeholder="Search a pokemon!"
                     value={searchFormData.searchText}
                     onChange={(event) => handleFormChange(event)}
                 ></SearchInputStyled>
-                <Button
-                    buttonText="Search"
-                    buttonAction={() =>
-                        navigateToSearchedPokemon(searchFormData.searchText)
+                <SearchClearButtonStyled
+                    className={
+                        !searchFormData.searchText ? "clear-button-hidden" : ""
                     }
-                />
-                {unexistentPokemon && searchFormData.searchText && (
-                    <div>
-                        <SearchResultsOverlay aria-label="pokemon-list">
-                            {pokemonFiltered.map((pokemon) => (
+                    onClick={() => clearSearch()}
+                >
+                    <FontAwesomeIcon icon={faTimesCircle} />
+                </SearchClearButtonStyled>
+            </div>
+            <div className="search-overlay-container">
+                {searchFormData.searchText && (
+                    <SearchResultsOverlay aria-label="pokemon-list">
+                        {pokemonFiltered.length > 0 ? (
+                            pokemonFiltered.map((pokemon) => (
                                 <SearchResult
                                     onClick={() =>
                                         navigateToSearchedPokemon(pokemon)
                                     }
+                                    key={pokemon}
                                 >
                                     {pokemon.charAt(0).toUpperCase() +
                                         pokemon.slice(1)}
                                 </SearchResult>
-                            ))}
-                        </SearchResultsOverlay>
-                    </div>
+                            ))
+                        ) : (
+                            <UnexistentFeedbackStyled>
+                                Pokemon doesn't exist!
+                            </UnexistentFeedbackStyled>
+                        )}
+                    </SearchResultsOverlay>
                 )}
-            </SearchBarStyled>
-        </>
+            </div>
+        </SearchBarStyled>
     );
 };
 
