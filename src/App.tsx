@@ -5,10 +5,11 @@ import usePokemon from "./hooks/usePokemon";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ListPage from "./pages/ListPage/ListPage";
 import PokemonPage from "./pages/PokemonPage/PokemonPage";
+import SearchBar from "./components/SearchBar/SearchBar";
 
 const App = (): JSX.Element => {
     const apiUrl = import.meta.env.VITE_API_URL;
-    const { getPokemons } = usePokemon(apiUrl);
+    const { getPokemons } = usePokemon(apiUrl as string);
     const [totalPokemons, setTotalPokemons] = useState<Pokemon[]>();
     const [currentPage, setCurrentPage] = useState<number>(0);
 
@@ -35,6 +36,7 @@ const App = (): JSX.Element => {
             {" "}
             <div className="main-container">
                 <h1 className="main-heading">POKE-REACT</h1>
+                <SearchBar />
                 <Button
                     buttonAction={() => {
                         if (currentPage !== 0) {
