@@ -18,4 +18,5 @@ export const StyledPokemonListContainer = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    padding-bottom: 100px;
 `;
