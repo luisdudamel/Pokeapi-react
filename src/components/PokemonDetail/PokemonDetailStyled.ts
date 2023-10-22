@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const PokemonDetailStyled = styled.article`
     width: 100%;
-    height: 50vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    justify-content: center;
     .game-boy-wrapper {
         display: flex;
         flex-direction: row; /* */
@@ -78,15 +78,38 @@ export const PokemonDetailStyled = styled.article`
         &--left {
             display: flex;
             flex-direction: column;
+            padding-left: 5px;
+
+            .pokemon-abilities {
+                list-style: none;
+                padding-left: 0px;
+                margin: 0px;
+                padding-top: 30px;
+                &__item {
+                    height: 20px;
+                }
+            }
+
+            p {
+                margin: 0px;
+            }
+            h2 {
+                margin: 0px;
+                font-size: 50px;
+                position: relative;
+                top: -35px;
+                height: 90px;
+            }
         }
 
         &--right {
             display: flex;
             justify-content: space-around;
             align-items: center;
+            flex: 1;
 
             .pokemon-image {
-                width: 300px;
+                width: 60%;
             }
         }
     }

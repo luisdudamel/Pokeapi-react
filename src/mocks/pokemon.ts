@@ -6,6 +6,8 @@ export const mockPikachu: Pokemon = {
     weight: 23,
     index: 2,
     image: "pikachu.jpg",
+    abilites: ["burn"],
+    imageHD: "example.jpg",
 };
 
 export const mockCharizard: Pokemon = {
@@ -14,6 +16,8 @@ export const mockCharizard: Pokemon = {
     weight: 23,
     index: 2,
     image: "charizard.jpg",
+    abilites: ["burn"],
+    imageHD: "example.jpg",
 };
 
 export const mockPokemonNamesList: string[] = [
@@ -29,6 +33,8 @@ export const mockPokemonList: Pokemon[] = [
         weight: 23,
         index: 2,
         image: "charizard.jpg",
+        abilites: ["burn"],
+        imageHD: "example.jpg",
     },
     {
         name: "pikachu",
@@ -36,6 +42,8 @@ export const mockPokemonList: Pokemon[] = [
         weight: 23,
         index: 3,
         image: "pikachu.jpg",
+        abilites: ["burn"],
+        imageHD: "example.jpg",
     },
     {
         name: "bulbasaur",
@@ -43,6 +51,8 @@ export const mockPokemonList: Pokemon[] = [
         weight: 23,
         index: 4,
         image: "pikachu.jpg",
+        abilites: ["burn"],
+        imageHD: "example.jpg",
     },
     {
         name: "squirtle",
@@ -50,6 +60,8 @@ export const mockPokemonList: Pokemon[] = [
         weight: 23,
         index: 5,
         image: "pikachu.jpg",
+        abilites: ["burn"],
+        imageHD: "example.jpg",
     },
     {
         name: "mew",
@@ -57,5 +69,7 @@ export const mockPokemonList: Pokemon[] = [
         weight: 23,
         index: 6,
         image: "pikachu.jpg",
+        abilites: ["burn"],
+        imageHD: "example.jpg",
     },
 ];

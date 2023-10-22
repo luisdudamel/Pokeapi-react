@@ -22,6 +22,15 @@ const PokemonDetail = ({ pokemon }: PokemonDetailProps): JSX.Element => {
                                     pokemon.type.slice(1)}
                             </p>
                             <p>Weight: {pokemon.weight}kg</p>
+                            <ul className="pokemon-abilities">
+                                Abilities:
+                                {pokemon.abilites.map((ability) => (
+                                    <li className="pokemon-abilities__item">
+                                        {ability.charAt(0).toUpperCase() +
+                                            ability.slice(1)}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                         <div className="screen-info-wrapper--right">
                             <img
