@@ -3,6 +3,7 @@ import PokemonList from "../../components/PokemonList/PokemonList";
 import usePokemon from "../../hooks/usePokemon";
 import { Pokemon } from "../../types/pokemon";
 import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 const ListPage = (): JSX.Element => {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -21,6 +22,7 @@ const ListPage = (): JSX.Element => {
             <div className="main-container">
                 <Header pokemonNames={pokemonNames} />
                 <PokemonList pokemons={totalPokemons!} />
+                <Footer />
             </div>
         </>
     );
