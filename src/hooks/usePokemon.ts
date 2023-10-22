@@ -49,6 +49,7 @@ const usePokemon = (pokemonUrl: string) => {
                     weight: pokemon.weight,
                     index: pokemon.id,
                     image: pokemon.sprites.front_default,
+                    imageHD: pokemon.sprites.other.dream_world.front_default,
                 };
             });
 
@@ -67,6 +68,7 @@ const usePokemon = (pokemonUrl: string) => {
             return {
                 name: pokemonData.name,
                 image: pokemonData.sprites.front_default,
+                imageHD: pokemonData.sprites.other.dream_world.front_default,
                 index: pokemonData.id,
                 type: pokemonData.types[0].type.name,
                 weight: pokemonData.weight,
