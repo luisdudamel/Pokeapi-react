@@ -13,7 +13,8 @@ const PokemonPage = (): JSX.Element => {
     useEffect(() => {
         (async () => {
             if (pokemonId) {
-                setCurrentPokemon(await getPokemonById(pokemonId));
+                const pokemon = await getPokemonById(pokemonId);
+                pokemon && setCurrentPokemon(pokemon);
             }
         })();
     }, [getPokemonById, pokemonId]);

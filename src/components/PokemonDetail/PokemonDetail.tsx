@@ -8,14 +8,19 @@ interface PokemonDetailProps {
 const PokemonDetail = ({ pokemon }: PokemonDetailProps): JSX.Element => {
     return (
         <PokemonDetailStyled>
-            <h2>{pokemon.name}</h2>
+            <h2>
+                {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+            </h2>
             <img
                 src={pokemon.image}
                 alt={`${
                     pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
                 } in 8bits`}
             />
-            <p>Pokemon Type: {pokemon.type}</p>
+            <p>
+                Pokemon Type:{" "}
+                {pokemon.type.charAt(0).toUpperCase() + pokemon.type.slice(1)}
+            </p>
             <p>Weight: {pokemon.weight}kg</p>
         </PokemonDetailStyled>
     );

@@ -32,3 +32,8 @@ export type ApiPokemonResponse = {
     previous: null | string;
     results: ApiPokemon[];
 };
+
+export type ApiPokemonStats = {
+    currentMaxPokemon: number;
+    pokemonNames: string[];
+};

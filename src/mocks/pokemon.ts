@@ -15,3 +15,9 @@ export const mockCharizard: Pokemon = {
     index: 2,
     image: "charizard.jpg",
 };
+
+export const mockPokemonNamesList: string[] = [
+    "bulbasaur",
+    "charizard",
+    "pikachu",
+];

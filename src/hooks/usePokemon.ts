@@ -1,7 +1,26 @@
-import { useCallback } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { ApiPokemonData, ApiPokemonResponse, Pokemon } from "../types/pokemon";
 
 const usePokemon = (pokemonUrl: string) => {
+    const [pokemonNames, setPokemonNames] = useState<string[]>([]);
+
+    useEffect(() => {
+        (async () => {
+            const currentNamesBatch = (await (
+                await fetch(pokemonUrl as string)
+            ).json()) as ApiPokemonResponse;
+
+            const totalPokemonNames = (await (
+                await fetch(
+                    `${pokemonUrl}?offset=0&limit=${currentNamesBatch.count}/`
+                )
+            ).json()) as ApiPokemonResponse;
+            setPokemonNames(
+                totalPokemonNames.results.map((result) => result.name)
+            );
+        })();
+    }, [pokemonUrl]);
+
     const getPokemons = useCallback(
         async (
             currentOffset: string
@@ -41,6 +60,7 @@ const usePokemon = (pokemonUrl: string) => {
     const getPokemonById = useCallback(
         async (id: string): Promise<Pokemon> => {
             const pokemonResponse = await fetch(`${pokemonUrl}/${id}`);
+
             const pokemonData =
                 (await pokemonResponse.json()) as ApiPokemonData;
 
@@ -55,7 +75,8 @@ const usePokemon = (pokemonUrl: string) => {
 
         [pokemonUrl]
     );
-    return { getPokemons, getPokemonById };
+
+    return { getPokemons, getPokemonById, pokemonNames };
 };
 
 export default usePokemon;
