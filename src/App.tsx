@@ -9,7 +9,7 @@ import SearchBar from "./components/SearchBar/SearchBar";
 
 const App = (): JSX.Element => {
     const apiUrl = import.meta.env.VITE_API_URL;
-    const { getPokemons } = usePokemon(apiUrl as string);
+    const { getPokemons, pokemonNames } = usePokemon(apiUrl as string);
     const [totalPokemons, setTotalPokemons] = useState<Pokemon[]>();
     const [currentPage, setCurrentPage] = useState<number>(0);
 
@@ -36,7 +36,7 @@ const App = (): JSX.Element => {
             {" "}
             <div className="main-container">
                 <h1 className="main-heading">POKE-REACT</h1>
-                <SearchBar />
+                <SearchBar pokemons={pokemonNames} />
                 <Button
                     buttonAction={() => {
                         if (currentPage !== 0) {
